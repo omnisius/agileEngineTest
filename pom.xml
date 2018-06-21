@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>testWithMVN</groupId>
-    <artifactId>testWithMVN</artifactId>
+    <groupId>agileengine</groupId>
+    <artifactId>agileengine</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <finalName>agileengineapp</finalName>
@@ -48,6 +48,12 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/resources</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
                             <includeScope>compile</includeScope>
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                         </configuration>
