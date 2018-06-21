@@ -13,10 +13,9 @@ import org.slf4j.LoggerFactory;
 class JsoupFindById {
     private static Logger LOGGER = LoggerFactory.getLogger(JsoupFindById.class);
 
-    private static String CHARSET_NAME = "utf8";
-
     static Optional<Element> findElementById(File htmlFile, String targetElementId) {
         try {
+            String CHARSET_NAME = "utf8";
             Document doc = Jsoup.parse(
                     htmlFile,
                     CHARSET_NAME,

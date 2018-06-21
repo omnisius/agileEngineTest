@@ -27,7 +27,7 @@
                     </excludes>
                     <archive>
                         <manifest>
-                            <mainClass>com.gmail.bardakovbogdan.ElementFinder</mainClass>
+                            <mainClass>com.gmail.bardakovbogdan.ElementFinderRunner</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
