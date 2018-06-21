@@ -20,7 +20,7 @@ class FileFinder {
     File getFile(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         try {
-            return new File(classLoader.getResource("samples/" + fileName).getFile());
+            return new File(classLoader.getResource(fileName).getFile());
         } catch (NullPointerException e) {
             LOGGER.error("File " + fileName + " is absent. Program cannot be finished. Please check your parameters");
             throw e;
