@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-public class FileFinder {
+class FileFinder {
     private static Logger LOGGER = LoggerFactory.getLogger(FileFinder.class);
 
     private static FileFinder ourInstance = new FileFinder();
 
-    public static FileFinder getInstance() {
+    static FileFinder getInstance() {
         return ourInstance;
     }
 
