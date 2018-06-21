@@ -18,23 +18,27 @@ public class ElementFinderRunner {
     }
 
     private static void findElementAndLogResult(String originalFileName, String targetFileName, String elementId) {
-        FileFinder fileFinder =  new FileFinder();
+        FileFinder fileFinder =  FileFinder.getInstance();
         Optional<Element> element = JsoupFindById.findElementById(fileFinder.getFile(originalFileName), elementId);
         if(element.isPresent()) {
-            String queryString = String.format("a[%s=\"%s\"]", CONSTANT_ATTRIBUTE, element.get().attr(CONSTANT_ATTRIBUTE));
-            Optional<Elements> elements = JsoupCssSelect.findElementsByQuery(fileFinder.getFile(targetFileName), queryString);
-            if(elements.isPresent()) {
-                for (Element targetElement : elements.get()) {
-                    if (targetElement.hasAttr(ATRRIBUTE_THAT_SHOULD_BE_PRESENT)) {
-                        targetElement.parents().forEach(parentElement -> LOGGER.info("Parent of target element is " + parentElement.tag()));
-                        LOGGER.info("Target element is " + targetElement.tag());
-                    }
-                }
-            } else {
-                LOGGER.error("There are no suitable elements in file " + targetFileName);
-            }
+            findTargetElementAndLogResult(targetFileName, fileFinder, element);
         } else {
             LOGGER.error("element is absent in original file!");
+        }
+    }
+
+    private static void findTargetElementAndLogResult(String targetFileName, FileFinder fileFinder, Optional<Element> element) {
+        String queryString = String.format("a[%s=\"%s\"]", CONSTANT_ATTRIBUTE, element.get().attr(CONSTANT_ATTRIBUTE));
+        Optional<Elements> elements = JsoupCssSelect.findElementsByQuery(fileFinder.getFile(targetFileName), queryString);
+        if (elements.isPresent()) {
+            for (Element targetElement : elements.get()) {
+                if (targetElement.hasAttr(ATRRIBUTE_THAT_SHOULD_BE_PRESENT)) {
+                    targetElement.parents().forEach(parentElement -> LOGGER.info("Parent of target element is " + parentElement.tag()));
+                    LOGGER.info("Target element is " + targetElement.tag());
+                }
+            }
+        } else {
+            LOGGER.error("There are no suitable elements in file " + targetFileName);
         }
     }
 }

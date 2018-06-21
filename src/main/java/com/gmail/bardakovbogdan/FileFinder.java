@@ -5,8 +5,17 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-class FileFinder {
+public class FileFinder {
     private static Logger LOGGER = LoggerFactory.getLogger(FileFinder.class);
+
+    private static FileFinder ourInstance = new FileFinder();
+
+    public static FileFinder getInstance() {
+        return ourInstance;
+    }
+
+    private FileFinder() {
+    }
 
     File getFile(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
